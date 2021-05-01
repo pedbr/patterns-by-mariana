@@ -24,19 +24,22 @@ function ThemeConfig({ children }: Props) {
   const isLight = true
   // const isLight = useSelector((state) => !state.theme.darkMode)
 
-  const themeOptions = {
-    palette: palette[isLight ? 'light' : 'dark'],
-    customShadows: shadows[isLight ? 'light' : 'dark'],
-    customTypography: typography,
-    shape: borderRadius,
-    breakpoints: breakpointsX,
-    appBar: {
-      height: 92,
-    },
-    borderRadius: {
-      card: 20,
-    },
-  }
+  const themeOptions = useMemo(
+    () => ({
+      palette: palette[isLight ? 'light' : 'dark'],
+      customShadows: shadows[isLight ? 'light' : 'dark'],
+      customTypography: typography,
+      shape: borderRadius,
+      breakpoints: breakpointsX,
+      appBar: {
+        height: 92,
+      },
+      borderRadius: {
+        card: 20,
+      },
+    }),
+    [isLight]
+  )
 
   if (!isLight) themeOptions.palette.mode = 'dark'
 
